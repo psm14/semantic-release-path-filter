@@ -6,7 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "files": [
+    "index.js"
+  ],
+  "author": "Patrick McLaughlin <me@patmclaughl.in>",
   "license": "ISC",
-  "description": ""
+  "description": "Wraps a semantic-release plugin to only run on commits in a specific path",
+  "devDependencies": {
+    "@semantic-release/git": "^10.0.1"
+  }
 }

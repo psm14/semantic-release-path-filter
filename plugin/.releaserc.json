@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    [
+      "@psm14/semantic-release-path-filter",
+      {
+        "path": "plugin",
+        "originalPlugin": "@semantic-release/commit-analyzer"
+      }
+    ],
+    [
+      "@psm14/semantic-release-path-filter",
+      {
+        "path": "plugin",
+        "originalPlugin": "@semantic-release/release-notes-generator"
+      }
+    ],
+    [
+      "@psm14/semantic-release-path-filter",
+      {
+        "path": "plugin",
+        "originalPlugin": "@semantic-release/git"
+      }
+    ]
+  ]
+}
