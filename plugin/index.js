@@ -25,7 +25,7 @@ function getChangedFiles(commitHash) {
 
 function makePlugin(name) {
   return async function (pluginConfig, context) {
-    const { path, originalPlugin, ...remainingConfig } = pluginConfig;
+    const { path, plugin, ...remainingConfig } = pluginConfig;
 
     const originalPluginName =
       typeof originalPlugin === "string" ? originalPlugin : originalPlugin[0];
@@ -33,8 +33,8 @@ function makePlugin(name) {
       ? { ...remainingConfig, ...originalPlugin[1] }
       : remainingConfig;
 
-    const plugin = await import(originalPluginName);
-    if (!(name in plugin)) {
+    const pluginModule = await import(originalPluginName);
+    if (!(name in pluginModule)) {
       return;
     }
 
@@ -45,7 +45,7 @@ function makePlugin(name) {
             commits: filterCommits(context.commits, path),
           }
         : context;
-    return plugin[name](originalPluginConfig, filteredContext);
+    return pluginModule[name](originalPluginConfig, filteredContext);
   };
 }
 

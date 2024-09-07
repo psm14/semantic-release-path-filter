@@ -1,3 +1,18 @@
+# semantic-release-path-filter
+
+A plugin for semantic-release that filters commits based on file paths before passing them to other semantic-release plugins.
+
+## Installation
+
+```bash
+npm install --save-dev @psm14/semantic-release-path-filter
+```
+
+## Usage
+
+This plugin wraps around other semantic-release plugins and filters the commits they receive based on file paths.
+
+```json
 {
   "plugins": [
     [
@@ -30,3 +45,6 @@
     ]
   ]
 }
+```
+
+The `plugin` option may be a string or an array consisting of the name and a configuration object.
