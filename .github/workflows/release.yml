@@ -26,6 +26,7 @@ jobs:
           node-version: "lts/*"
 
       - name: Install dependencies
+        working-directory: plugin
         run: npm ci
 
       - name: Release
