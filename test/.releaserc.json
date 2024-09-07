@@ -1,0 +1,4 @@
+{
+  "dryRun": true,
+  "plugins": ["@psm14/semantic-release-path-filter"]
+}

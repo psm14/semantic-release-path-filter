@@ -1,0 +1,20 @@
+{
+  "name": "@psm14/semantic-release-path-filter-test",
+  "version": "0.0.1",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "semantic-release"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/psm14/semantic-release-path-filter"
+  },
+  "description": "",
+  "devDependencies": {
+    "@psm14/semantic-release-path-filter": "*",
+    "semantic-release": "^24.1.0"
+  }
+}

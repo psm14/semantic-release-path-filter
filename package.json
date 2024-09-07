@@ -1,0 +1,8 @@
+{
+  "name": "semantic-release-path-filter-workspace",
+  "version": "1.0.0",
+  "workspaces": [
+    "plugin",
+    "test"
+  ]
+}
