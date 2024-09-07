@@ -4,7 +4,8 @@
     [
       "@psm14/semantic-release-path-filter",
       {
-        "path": "test"
+        "path": "test",
+        "originalPlugin": "@semantic-release/commit-analyzer"
       }
     ]
   ]

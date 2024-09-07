@@ -8,11 +8,5 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@semantic-release/commit-analyzer": "^13.0.0"
-  },
-  "peerDependencies": {
-    "@semantic-release/commit-analyzer": "^13.0.0"
-  }
+  "description": ""
 }

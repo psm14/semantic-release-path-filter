@@ -1,22 +1,24 @@
-import { analyzeCommits as analyzeCommitsOriginal } from "@semantic-release/commit-analyzer";
 import { execSync } from "child_process";
 
 export async function analyzeCommits(pluginConfig, context) {
-  const { path } = pluginConfig;
+  const { path, originalPlugin } = pluginConfig;
 
-  // Filter commits based on the specified path
-  const filteredCommits = context.commits.filter((commit) => {
-    const changedFiles = getChangedFiles(commit.hash);
-    return changedFiles.some((file) => file.startsWith(path));
-  });
+  const filteredCommits = filterCommits(context.commits, path);
 
-  // Create a new context with filtered commits
   const filteredContext = {
     ...context,
     commits: filteredCommits,
   };
 
-  return analyzeCommitsOriginal(pluginConfig, filteredContext);
+  const plugin = await import(originalPlugin);
+  return plugin.analyzeCommits(pluginConfig, filteredContext);
+}
+
+function filterCommits(commits, path) {
+  return commits.filter((commit) => {
+    const changedFiles = getChangedFiles(commit.hash);
+    return changedFiles.some((file) => file.startsWith(path));
+  });
 }
 
 function getChangedFiles(commitHash) {
