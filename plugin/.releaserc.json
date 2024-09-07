@@ -20,6 +20,13 @@
         "path": "plugin",
         "originalPlugin": "@semantic-release/git"
       }
+    ],
+    [
+      "@psm14/semantic-release-path-filter",
+      {
+        "path": "plugin",
+        "originalPlugin": "@semantic-release/github"
+      }
     ]
   ]
 }
