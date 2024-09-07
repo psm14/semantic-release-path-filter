@@ -12,6 +12,10 @@
   "author": "Patrick McLaughlin <me@patmclaughl.in>",
   "license": "ISC",
   "description": "Wraps a semantic-release plugin to only run on commits in a specific path",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:psm14/semantic-release-path-filter"
+  },
   "devDependencies": {
     "@semantic-release/git": "^10.0.1"
   }
