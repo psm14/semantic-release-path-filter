@@ -34,14 +34,17 @@ function makePlugin(name) {
       : remainingConfig;
 
     const plugin = await import(originalPluginName);
-    if (!name in plugin) {
+    if (!(name in plugin)) {
       return;
     }
 
-    const filteredContext = {
-      ...context,
-      commits: filterCommits(context.commits, path),
-    };
+    const filteredContext =
+      "commits" in context
+        ? {
+            ...context,
+            commits: filterCommits(context.commits, path),
+          }
+        : context;
     return plugin[name](originalPluginConfig, filteredContext);
   };
 }
