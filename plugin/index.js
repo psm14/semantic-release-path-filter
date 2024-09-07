@@ -27,10 +27,9 @@ function makePlugin(name) {
   return async function (pluginConfig, context) {
     const { path, plugin, ...remainingConfig } = pluginConfig;
 
-    const originalPluginName =
-      typeof originalPlugin === "string" ? originalPlugin : originalPlugin[0];
-    const originalPluginConfig = Array.isArray(originalPlugin)
-      ? { ...remainingConfig, ...originalPlugin[1] }
+    const originalPluginName = typeof plugin === "string" ? plugin : plugin[0];
+    const originalPluginConfig = Array.isArray(plugin)
+      ? { ...remainingConfig, ...plugin[1] }
       : remainingConfig;
 
     const pluginModule = await import(originalPluginName);
