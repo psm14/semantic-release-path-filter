@@ -16,13 +16,21 @@ function filterCommits({ commits, logger }, path) {
   });
 }
 
+const CHANGED_FILES_MEMO = new Map();
+
 function getChangedFiles(commitHash) {
+  if (CHANGED_FILES_MEMO.has(commitHash)) {
+    return CHANGED_FILES_MEMO.get(commitHash);
+  }
+
   try {
     const result = execSync(
       `git diff-tree --no-commit-id --name-only -r ${commitHash}`,
       { encoding: "utf-8" }
     );
-    return result.trim().split("\n");
+    const changedFiles = result.trim().split("\n");
+    CHANGED_FILES_MEMO.set(commitHash, changedFiles);
+    return changedFiles;
   } catch (error) {
     logger.error(
       `Error getting changed files for commit ${commitHash}:`,
