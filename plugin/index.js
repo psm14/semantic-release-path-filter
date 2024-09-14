@@ -1,9 +1,18 @@
 import { execSync } from "child_process";
 
-function filterCommits(commits, path) {
+function filterCommits({ commits, logger }, path) {
   return commits.filter((commit) => {
     const changedFiles = getChangedFiles(commit.hash);
-    return changedFiles.some((file) => file.startsWith(path));
+    const isRelevant = changedFiles.some((file) => file.startsWith(path));
+    if (!isRelevant) {
+      logger.info(
+        `Filtered out commit ${commit.hash.slice(
+          0,
+          7
+        )} as it doesn't affect '${path}'`
+      );
+    }
+    return isRelevant;
   });
 }
 
@@ -15,7 +24,7 @@ function getChangedFiles(commitHash) {
     );
     return result.trim().split("\n");
   } catch (error) {
-    console.error(
+    logger.error(
       `Error getting changed files for commit ${commitHash}:`,
       error
     );
@@ -37,13 +46,22 @@ function makePlugin(name) {
       return;
     }
 
+    const scopedLogger = context.logger.scope(
+      ...context.logger.scopeName,
+      originalPluginName
+    );
     const filteredContext =
       "commits" in context
         ? {
             ...context,
-            commits: filterCommits(context.commits, path),
+            commits: filterCommits(context, path),
+            logger: scopedLogger,
           }
-        : context;
+        : {
+            ...context,
+            logger: scopedLogger,
+          };
+
     return pluginModule[name](originalPluginConfig, filteredContext);
   };
 }
