@@ -1,11 +1,18 @@
 import { execSync } from "child_process";
-import { relative } from "path";
+import { relative, resolve } from "path";
 
 function filterCommits({ commits, logger }, path) {
+  const absoluteFilterPath = resolve(path);
+  logger.debug(`Filter path resolved to: ${absoluteFilterPath}`);
+  
   return commits.filter((commit) => {
     const changedFiles = getChangedFiles(commit.hash);
     const isRelevant = changedFiles.some((file) => {
-      const relativePath = relative(path, file);
+      const absoluteFilePath = resolve(file);
+      const relativePath = relative(absoluteFilterPath, absoluteFilePath);
+      
+      logger.debug(`Checking file: ${file} -> ${absoluteFilePath} -> relativePath: ${relativePath}`);
+      
       return !relativePath.startsWith('..');
     });
     if (!isRelevant) {
