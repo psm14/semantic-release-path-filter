@@ -18,7 +18,9 @@
     "url": "git@github.com:psm14/semantic-release-path-filter"
   },
   "devDependencies": {
-    "@semantic-release/git": "^10.0.1"
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "",
+    "semantic-release": "^25.0.2"
   },
   "publishConfig": {
     "access": "public"

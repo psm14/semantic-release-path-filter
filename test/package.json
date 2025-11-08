@@ -16,6 +16,6 @@
   "description": "",
   "devDependencies": {
     "@psm14/semantic-release-path-filter": "*",
-    "semantic-release": "^24.1.0"
+    "semantic-release": "^25.0.2"
   }
 }
