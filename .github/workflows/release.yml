@@ -34,5 +34,6 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: trusted-publishing-placeholder-token
         working-directory: plugin
         run: npx --no-install semantic-release
